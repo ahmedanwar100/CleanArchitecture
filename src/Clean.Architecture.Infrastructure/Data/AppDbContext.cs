@@ -1,12 +1,15 @@
 ﻿using System.Reflection;
 using Clean.Architecture.Core.ProjectAggregate;
+using Clean.Architecture.Core.RoleAggregate;
+using Clean.Architecture.Core.UserAggregate;
 using Clean.Architecture.SharedKernel;
 using Clean.Architecture.SharedKernel.Interfaces;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Clean.Architecture.Infrastructure.Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext :  IdentityDbContext<User, Role, int>
 {
   private readonly IDomainEventDispatcher? _dispatcher;
 

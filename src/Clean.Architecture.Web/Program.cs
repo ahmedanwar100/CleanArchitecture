@@ -1,10 +1,21 @@
-﻿using Ardalis.ListStartupServices;
+﻿using System.Security.Claims;
+using System.Text;
+using Ardalis.ListStartupServices;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Clean.Architecture.Core;
+using Clean.Architecture.Core.Interfaces;
+using Clean.Architecture.Core.RoleAggregate;
+using Clean.Architecture.Core.UserAggregate;
 using Clean.Architecture.Infrastructure;
 using Clean.Architecture.Infrastructure.Data;
+using Clean.Architecture.SharedKernel.Auth;
+using Clean.Architecture.SharedKernel.Interfaces;
+using Clean.Architecture.SharedKernel.Utilities;
 using Clean.Architecture.Web;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
@@ -20,7 +31,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
   options.MinimumSameSitePolicy = SameSiteMode.None;
 });
 
-string connectionString = builder.Configuration.GetConnectionString("SqliteConnection");  //Configuration.GetConnectionString("DefaultConnection");
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");  //Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext(connectionString);
 
@@ -42,6 +53,10 @@ builder.Services.Configure<ServiceConfig>(config =>
   config.Path = "/listservices";
 });
 
+builder.Services.Configure<SiteSettings>(builder.Configuration.GetSection(nameof(SiteSettings)));
+var settings = builder.Configuration.GetSection(nameof(SiteSettings)).Get<SiteSettings>();
+builder.Services.AddCustomIdentity(settings.IdentitySettings);
+builder.Services.AddCustomJwtAuthentication(settings.JwtSettings);
 
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
@@ -64,6 +79,9 @@ else
   app.UseHsts();
 }
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

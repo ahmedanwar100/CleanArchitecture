@@ -17,12 +17,20 @@
     <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageVersion Include="coverlet.collector" Version="3.1.2" />
     <PackageVersion Include="MediatR" Version="11.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer">
+      <Version>6.0.10</Version>
+    </PackageVersion>
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore">
+      <Version>6.0.10</Version>
+    </PackageVersion>
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.10" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Identity.Stores" Version="6.0.10">
+    </PackageVersion>
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
     <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
     <PackageVersion Include="Moq" Version="4.18.2" />
@@ -33,6 +41,9 @@
     <PackageVersion Include="SQLite" Version="3.13.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
+    <PackageVersion Include="System.IdentityModel.Tokens.Jwt">
+      <Version>6.25.0</Version>
+    </PackageVersion>
     <PackageVersion Include="xunit" Version="2.4.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5" />
   </ItemGroup>
